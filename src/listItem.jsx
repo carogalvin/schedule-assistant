@@ -2,17 +2,19 @@ const React = require('react');
 const _ = require('lodash');
 
 module.exports = React.createClass({
-    handleClick: function(name) {
-        this.props.whenItemClicked(name)   
+    handleClick: function() {
+        this.props.whenItemClicked(this.props.showName); 
+    },
+    
+    handleDelete: function() {
+        console.log('hit the button!');
     },
     
     render: function() {
         var currName = this.props.showName;
-        console.log(currName);
-        if(_.isEmpty(currName)) {
-            return <li className="li-empty">No shows currently</li>
-        } else {
-            return <li className={this.props.className}><a onClick={this.handleClick(currName)}>{currName}</a></li>
-        }
+        return <li className={this.props.className}>
+                    <a style={{display:"inline"}} onClick={this.handleClick}>{currName}</a>
+            <a style={{display:"inline"}} onClick={this.handleDelete}><span className="glyphicon glyphicon-remove"></span></a>            
+        </li> 
     }
 }); 

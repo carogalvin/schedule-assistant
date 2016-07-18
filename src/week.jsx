@@ -20,7 +20,6 @@ module.exports = React.createClass({
     handleValues: function(snap) {
         this.calcMaxAvailability(snap);
         this.setState({people: snap});
-        
     },
     
     calcMaxAvailability: function(snapshot) {

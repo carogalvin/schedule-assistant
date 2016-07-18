@@ -22,8 +22,8 @@ module.exports = React.createClass({
     },
     
     handleItemClick: function(name) {
-        //this.setState({currSelected: name});
-        //this.props.setShow(name);
+        this.setState({currSelected: name, open: false});
+        this.props.setShow(name);
     },
     
     addShow: function(name) {
