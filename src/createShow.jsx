@@ -21,8 +21,8 @@ getInitialState: function() {
     
     addShow: function() {
         if(!_.isEmpty(this.state.name)) {
-            this.close();
             this.props.addShow(this.state.name);
+            this.close();
         } else {
             this.setState({err: true});
         } 
@@ -51,8 +51,8 @@ getInitialState: function() {
                                 Please enter a title
                             </td>
                             <td className="right-align"> 
-                                <button onClick={this.close}>Cancel</button>
-                                <button onClick={this.addShow}>Save</button>
+                                <button onClick={this.close} className="btn btn-default">Cancel</button>
+                                <button onClick={this.addShow} className="btn btn-default">Save</button>
                             </td>
                         </tr>
                     </tbody>

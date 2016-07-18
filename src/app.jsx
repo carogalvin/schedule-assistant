@@ -23,7 +23,7 @@ var app = React.createClass({
     },
     
     setShowName: function(name) {
-        this.setState({showName: name});
+        //this.setState({showName: name});
     },
     
     render: function() {
