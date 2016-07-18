@@ -1,0 +1,67 @@
+.col {
+    padding-right: 0px;
+    padding-left: 0px;
+}
+
+.input-group {
+    padding-bottom: 10px;
+    width:100%;
+}
+
+.input-group-addon {
+    min-width: 61px;
+}
+
+.btn-group {
+    padding-top: 10px;
+    width: 100%;
+}
+
+.submit-btn {
+    padding-top: 10px;
+}
+
+.selected-btn, .selected-btn:hover, .selected-btn:focus {
+    background-color: #e6e6e6;
+}
+
+.unselected-btn, .unselected-btn:hover, .unselected-btn:focus {
+    background-color: #ffffff;
+}
+
+.btn-day {
+    width:14.28%;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 0;
+    padding-right: 0;
+}
+
+.day {
+    height:50%;
+    overflow-y: auto;
+}
+
+.li-empty {
+    color: darkgray;
+    font-style: italic;
+    padding-left: 10px;
+}
+
+.shownew {
+    margin-left: 5px;
+}
+
+.error-left {
+    text-align: left;
+    color: red;
+    visibility: hidden;
+}
+
+.error-left.show {
+    visibility: visible;
+}
+
+.right-align {
+    text-align: right;
+}
