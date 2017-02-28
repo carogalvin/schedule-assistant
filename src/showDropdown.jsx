@@ -1,20 +1,11 @@
 const React = require('react');
 const CreateShow = require('./createShow');
 const ListItem = require('./listItem');
+const _ = require('lodash');
 
 module.exports = React.createClass({
-    componentWillMount: function() {
-        this.props.db.on('child_added', this.handleNewShow);
-    },
-    
     getInitialState: function() {
-        return {open: false, shows: [], currSelected: ''};
-    },
-    
-    handleNewShow: function(snap) {
-        var shows = this.state.shows;
-        shows.push(snap.val());
-        this.setState({shows: shows});
+        return {open: false, currSelected: '', tempShows: []};
     },
     
     handleClick: function() {
@@ -27,14 +18,18 @@ module.exports = React.createClass({
     },
     
     addShow: function(name) {
-        this.props.db.push(name);
+        var shows = this.state.tempShows;
+        shows.push(name);
+        shows = _.sortBy(shows);
+        this.setState({tempShows: shows, currSelected: name, open: false});
+        this.props.setShow(name);
     },
     
     render: function() {
-        var shows = this.state.shows;
+        var shows = _.sortBy(_.uniq(this.props.showList.concat(this.state.tempShows)));
         var list = [];
         if(_.isEmpty(shows)) {
-            list = <li className="li-empty">No shows currently</li>
+            list = [<li className="li-empty">No shows currently</li>]
         } else {
             list = shows.map(function(item) {
                return <ListItem 
@@ -42,17 +37,17 @@ module.exports = React.createClass({
                         whenItemClicked={this.handleItemClick}
                         className = {this.state.currSelected === item ? "active" : ""}
                       /> 
-                }.bind(this));
+                }.bind(this)); 
         }
         
         return <div className="btn-group">
           <button type="button" className="btn btn-default dropdown-toggle" onClick={this.handleClick}>
-              {this.state.currSelected ? this.state.currSelected : 'Select Your Show'} <span className="caret"></span>
+              <span className="showname">{this.state.currSelected ? this.state.currSelected : 'Select Your Show'}</span> <span className="caret"></span>
           </button>
             <ul className={"dropdown-menu " + (this.state.open ? "show" : "")}>
                 {list}
                 <li role="separator" className="divider"></li>
-                <CreateShow db={this.props.db} addShow={this.addShow}/>
+                <CreateShow addShow={this.addShow}/>
             </ul>
             
         </div>
