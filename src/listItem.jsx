@@ -12,9 +12,11 @@ module.exports = React.createClass({
     
     render: function() {
         var currName = this.props.showName;
-        return <li className={this.props.className}>
-                    <a style={{display:"inline"}} onClick={this.handleClick}>{currName}</a>
-            <a style={{display:"inline"}} onClick={this.handleDelete}><span className="glyphicon glyphicon-remove"></span></a>            
+        return <li className={this.props.className} style={{width:"100%"}}>
+            <div className="li-style">
+                <a onClick={this.handleClick}>{currName}</a>
+                <span className="glyphicon glyphicon-remove" onClick={this.handleDelete}></span>    
+            </div>
         </li> 
     }
 }); 

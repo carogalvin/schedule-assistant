@@ -5,6 +5,7 @@ const Week = require('./week');
 const Submit = require('./submit');
 const Alert = require('./alert');
 const ShowDropdown = require('./showDropdown');
+const _ = require('lodash');
 
 var fbConfig = {
     apiKey: "AIzaSyC8uVGIi_sF41N5Rm0CXulwGOJk-pjwz-A",
@@ -19,11 +20,22 @@ var db = firebase.database();
 
 var app = React.createClass({
     getInitialState: function() {
-        return {showName:'default'};
+        return {showName:'default', showList: []};
     },
     
     setShowName: function(name) {
         this.setState({showName: name});
+    },
+    
+    componentWillMount: function() {
+        db.ref().on('value', this.showList);
+    },
+    
+    showList: function(snap) {
+        console.log(Object.keys(snap.val()));
+        var currShows = _.uniq(this.state.showList.concat(Object.keys(snap.val())));
+        console.log(currShows);
+        this.setState({showList: currShows});
     },
     
     render: function() {
@@ -40,7 +52,7 @@ var app = React.createClass({
                         <Submit db={db.ref()} showName={this.state.showName}/>
                     </div>
                     <div className="col-md-4 col-md-offset-1 col">
-                        <ShowDropdown db={db.ref()} setShow={this.setShowName}/> 
+                        <ShowDropdown showList={this.state.showList} setShow={this.setShowName}/> 
                     </div>
                 </div>
             </div>

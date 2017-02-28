@@ -16,6 +16,7 @@ module.exports = React.createClass({
              var people = [];
              this.props.people.forEach( function(member) {
                  person = member.val();
+                 console.log(person);
                  if(person.avail[i]){
                      people.push(<div key={member.key} name={person.name}>{person.name}</div>);
                  }
